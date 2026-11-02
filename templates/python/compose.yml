@@ -1,0 +1,15 @@
+services:
+  app:
+    build: .
+    working_dir: /workspace
+    environment:
+      UV_LINK_MODE: copy
+    volumes:
+      - .:/workspace
+      - python-venv:/workspace/.venv
+      - uv-cache:/root/.cache/uv
+    command: ["sh", "-c", "make sync && uv run --locked --all-groups python -m example_app"]
+
+volumes:
+  python-venv:
+  uv-cache:

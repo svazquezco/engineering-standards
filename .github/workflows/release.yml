@@ -1,0 +1,32 @@
+name: Documentation release
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: documentation-release
+  cancel-in-progress: false
+jobs:
+  validate:
+    name: Validate release candidate
+    if: github.ref == 'refs/heads/main' && vars.RELEASE_AUTOMATION_ENABLED == 'true'
+    uses: ./.github/workflows/checks.yml
+  release:
+    name: Propose or publish documentation version
+    needs: validate
+    if: github.ref == 'refs/heads/main' && vars.RELEASE_AUTOMATION_ENABLED == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: write
+      issues: write
+      pull-requests: write
+    steps:
+      - name: Generate release PR or publish the reviewed release
+        uses: googleapis/release-please-action@8b8fd2cc23b2e18957157a9d923d75aa0c6f6ad5 # v4
+        with:
+          config-file: release-please-config.json
+          manifest-file: .release-please-manifest.json
+          target-branch: main

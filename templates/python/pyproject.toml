@@ -1,0 +1,62 @@
+[dependency-groups]
+dev = [
+    "pre-commit==4.7.*",
+    "pyright==1.1.*",
+    "pytest==9.2.*",
+    "ruff==0.17.*",
+]
+
+[tool.pyright]
+include = ["example_app"]
+exclude = ["tests", "**/__pycache__", ".venv"]
+typeCheckingMode = "strict"
+venvPath = "."
+venv = ".venv"
+
+[tool.pytest.ini_options]
+addopts = ["--import-mode=importlib", "--strict-config", "--strict-markers"]
+pythonpath = ["."]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 120
+src = ["."]
+
+[tool.ruff.lint]
+select = ["ALL"]
+ignore = [
+    "D100", # Do not require module docstrings.
+    "D104", # Do not require package docstrings.
+    "COM812", # Let the formatter manage trailing commas.
+    "COM819", # Let the formatter manage trailing commas.
+    "D206", # Let the formatter manage docstring indentation.
+    "D300", # Let the formatter manage docstring quotes.
+    "E111", # Let the formatter manage indentation.
+    "E114", # Let the formatter manage comment indentation.
+    "E117", # Let the formatter manage indentation.
+    "Q000", # Let the formatter manage quotes.
+    "Q001", # Let the formatter manage quotes.
+    "Q002", # Let the formatter manage quotes.
+    "Q003", # Let the formatter manage escaped quotes.
+    "Q004", # Let the formatter manage escaped quotes.
+    "W191", # Let the formatter manage indentation.
+]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**/*.py" = [
+    "ANN001", # Test and fixture parameters remain unannotated.
+    "ANN002", # Test and fixture variadic arguments remain unannotated.
+    "ANN003", # Test and fixture keyword arguments remain unannotated.
+    "ANN201", # Test and fixture return values remain unannotated.
+    "ANN202", # Fixture factories remain unannotated.
+    "D103",   # Use descriptive test and fixture names instead of docstrings.
+    "S101",   # Assertions are the pytest assertion mechanism.
+]
+"**/conftest.py" = ["ANN001", "ANN002", "ANN003", "ANN201", "ANN202", "D103"]
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+
+[tool.uv.build-backend]
+module-name = "example_app"
+module-root = ""

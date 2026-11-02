@@ -1,0 +1,30 @@
+[tool.pyright]
+typeCheckingMode = "strict"
+pythonVersion = "3.14"
+
+[tool.ruff]
+line-length = 120
+src = ["."]
+
+[tool.ruff.lint]
+select = ["ALL"]
+ignore = [
+    "D100", # Do not require module docstrings.
+    "D104", # Do not require package docstrings.
+    "COM812", # Let the formatter manage trailing commas.
+    "COM819", # Let the formatter manage trailing commas.
+    "D206", # Let the formatter manage docstring indentation.
+    "D300", # Let the formatter manage docstring quotes.
+    "E111", # Let the formatter manage indentation.
+    "E114", # Let the formatter manage comment indentation.
+    "E117", # Let the formatter manage indentation.
+    "Q000", # Let the formatter manage quotes.
+    "Q001", # Let the formatter manage quotes.
+    "Q002", # Let the formatter manage quotes.
+    "Q003", # Let the formatter manage escaped quotes.
+    "Q004", # Let the formatter manage escaped quotes.
+    "W191", # Let the formatter manage indentation.
+]
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
