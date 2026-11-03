@@ -18,10 +18,10 @@ For example:
 
 Read the relevant linked standards before working on a task:
 
-- [Documentation](https://raw.githubusercontent.com/svazquezco/engineering-standards/v1.0.0/standards/documentation.md)
-- [Python coding](https://raw.githubusercontent.com/svazquezco/engineering-standards/v1.0.0/standards/python-coding.md)
-- [Python unit tests](https://raw.githubusercontent.com/svazquezco/engineering-standards/v1.0.0/standards/python-testing.md)
-- [Dependencies](https://raw.githubusercontent.com/svazquezco/engineering-standards/v1.0.0/standards/dependencies.md)
+- [Documentation](https://raw.githubusercontent.com/svazquezco/engineering-standards/v1.0.1/standards/documentation.md)
+- [Python coding](https://raw.githubusercontent.com/svazquezco/engineering-standards/v1.0.1/standards/python-coding.md)
+- [Python unit tests](https://raw.githubusercontent.com/svazquezco/engineering-standards/v1.0.1/standards/python-testing.md)
+- [Dependencies](https://raw.githubusercontent.com/svazquezco/engineering-standards/v1.0.1/standards/dependencies.md)
 ```
 <!-- x-release-please-end -->
 
@@ -34,10 +34,10 @@ Follow [Start a Python project](python-projects.md) to initialize metadata with 
 ## Reference a fixed version
 
 <!-- x-release-please-start-version -->
-Templates pin every link to the same published tag, such as `v1.0.0`:
+Templates pin every link to the same published tag, such as `v1.0.1`:
 
 ```text
-https://raw.githubusercontent.com/svazquezco/engineering-standards/v1.0.0/standards/documentation.md
+https://raw.githubusercontent.com/svazquezco/engineering-standards/v1.0.1/standards/documentation.md
 ```
 <!-- x-release-please-end -->
 
