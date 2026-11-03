@@ -9,7 +9,7 @@ Scope: Python source code. Unit tests follow [Python testing](python-testing.md)
 - Follow the project’s existing lint and formatter configuration. For new projects, initialize Ruff with `select = ["ALL"]`, Google-style docstring checks, and documented exceptions for module/package docstrings, tests, and formatter compatibility. Review newly enabled rules when upgrading Ruff.
 - Follow the project’s existing type-checker configuration and source scope. For new projects, initialize Pyright with `typeCheckingMode = "strict"` for production code in pyproject.toml. Tests and fixtures follow the project’s test policy.
 - Use a maximum line length of 120 characters. Set `line-length = 120` under `[tool.ruff]` in pyproject.toml.
-- Order imports in standard-library, third-party, and local groups, alphabetically within each group, using the formatter’s ordering rules.
+- Order imports in standard-library, third-party, and local groups, alphabetically within each group, enforced by Ruff’s import-sorting rule (`I001`) rather than the formatter.
 - Within a module, group constants, classes, public functions, and non-public helpers; sort names alphabetically within each group when dependencies permit.
 - Within a class, use this top-to-bottom order: class attributes, construction methods (`__new__`, `__init__`), other special methods, properties, public methods, protected methods (`_name`), and private methods (`__name`). Sort names alphabetically within each group. Keep property setters and deleters beside their getter. Preserve ordering required by execution or framework behavior.
 - Inject external clients at integration boundaries. Keep helpers on a class when they serve only that class; use module functions for shared behavior.
@@ -18,6 +18,5 @@ Scope: Python source code. Unit tests follow [Python testing](python-testing.md)
 - Group related modules by responsibility. Avoid generic utils modules accumulating unrelated behavior.
 - Prefer simple, intention-revealing names and explicit control flow.
 - Correct findings instead of disabling checks. If a suppression is unavoidable, scope it to one rule and explain the reason beside it.
-- If docstring rules are enabled, configure them to exclude module and package docstrings rather than adding docstrings to satisfy a check.
 
 See [dependencies](dependencies.md), [error handling](error-handling.md), and [CLI](cli.md).

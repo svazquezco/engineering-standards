@@ -20,3 +20,11 @@ repos:
     hooks:
       - id: pyright
         pass_filenames: false
+  - repo: local
+    hooks:
+      - id: check-standards-index
+        name: Check standards index
+        entry: python scripts/check_index.py
+        language: python
+        pass_filenames: false
+        files: ^(README\.md|standards/.*)$

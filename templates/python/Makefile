@@ -11,7 +11,7 @@ help: ## Show available commands
 	@echo "Available commands:"
 	@awk 'BEGIN {FS = ":.*##"} /^[a-zA-Z0-9_-]+:.*##/ {printf "  make %-22s %s\n", $$1, $$2}' $(MAKEFILE_LIST)
 
-check: lint format-check typecheck test ## Run lint, formatting, typing, and tests
+check: pre-commit test ## Run all pre-commit hooks and tests (same as CI)
 
 format: ## Format Python files
 	$(UV_RUN) ruff format .

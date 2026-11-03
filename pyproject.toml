@@ -28,3 +28,6 @@ ignore = [
 
 [tool.ruff.lint.pydocstyle]
 convention = "google"
+
+[tool.ruff.lint.per-file-ignores]
+"scripts/*.py" = ["INP001"] # Standalone scripts are run by path, not imported as a package.

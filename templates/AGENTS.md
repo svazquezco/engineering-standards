@@ -11,29 +11,31 @@ Keep the project’s purpose and main components in its existing documentation.
 
 ## Shared standards
 
-Read the relevant linked standards before working on a task. These links use the current standards on `main`. For a fixed documentation version, use the same published version tag or full commit SHA instead of `main` in every URL. If they cannot be accessed, report the limitation.
+<!-- x-release-please-start-version -->
+Read the relevant linked standards before working on a task. The links are pinned to the published tag `v1.0.0`; to upgrade, replace that tag in every URL together. If the project vendors the standards (for example as a Git submodule), use the local paths instead. If they cannot be accessed, report the limitation.
 
-- [Planning](https://github.com/svazquezco/engineering-standards/blob/main/standards/planning.md)
-- [Development](https://github.com/svazquezco/engineering-standards/blob/main/standards/development.md)
-- [Security](https://github.com/svazquezco/engineering-standards/blob/main/standards/security.md)
-- [Documentation](https://github.com/svazquezco/engineering-standards/blob/main/standards/documentation.md)
-- [Branching](https://github.com/svazquezco/engineering-standards/blob/main/standards/branching.md)
-- [Commits](https://github.com/svazquezco/engineering-standards/blob/main/standards/commit-messages.md)
-- [Pull requests](https://github.com/svazquezco/engineering-standards/blob/main/standards/pull-requests.md)
-- [Testing](https://github.com/svazquezco/engineering-standards/blob/main/standards/testing.md)
+- [Planning](https://raw.githubusercontent.com/svazquezco/engineering-standards/v1.0.0/standards/planning.md)
+- [Development](https://raw.githubusercontent.com/svazquezco/engineering-standards/v1.0.0/standards/development.md)
+- [Security](https://raw.githubusercontent.com/svazquezco/engineering-standards/v1.0.0/standards/security.md)
+- [Documentation](https://raw.githubusercontent.com/svazquezco/engineering-standards/v1.0.0/standards/documentation.md)
+- [Branching](https://raw.githubusercontent.com/svazquezco/engineering-standards/v1.0.0/standards/branching.md)
+- [Commits](https://raw.githubusercontent.com/svazquezco/engineering-standards/v1.0.0/standards/commit-messages.md)
+- [Pull requests](https://raw.githubusercontent.com/svazquezco/engineering-standards/v1.0.0/standards/pull-requests.md)
+- [Testing](https://raw.githubusercontent.com/svazquezco/engineering-standards/v1.0.0/standards/testing.md)
 
 For Python projects, also adopt:
 
-- [Python](https://github.com/svazquezco/engineering-standards/blob/main/standards/python-coding.md)
-- [Python tests](https://github.com/svazquezco/engineering-standards/blob/main/standards/python-testing.md)
-- [Dependencies](https://github.com/svazquezco/engineering-standards/blob/main/standards/dependencies.md)
-- [Error handling](https://github.com/svazquezco/engineering-standards/blob/main/standards/error-handling.md)
+- [Python](https://raw.githubusercontent.com/svazquezco/engineering-standards/v1.0.0/standards/python-coding.md)
+- [Python tests](https://raw.githubusercontent.com/svazquezco/engineering-standards/v1.0.0/standards/python-testing.md)
+- [Dependencies](https://raw.githubusercontent.com/svazquezco/engineering-standards/v1.0.0/standards/dependencies.md)
+- [Error handling](https://raw.githubusercontent.com/svazquezco/engineering-standards/v1.0.0/standards/error-handling.md)
 
-Also reference [CLI](https://github.com/svazquezco/engineering-standards/blob/main/standards/cli.md) when applicable.
+Also reference [CLI](https://raw.githubusercontent.com/svazquezco/engineering-standards/v1.0.0/standards/cli.md) and [Makefiles](https://raw.githubusercontent.com/svazquezco/engineering-standards/v1.0.0/standards/makefiles.md) when applicable.
+<!-- x-release-please-end -->
 
 ## Before publishing or updating a PR
 
-For Python projects using this configuration, run `uv run --locked --all-groups pre-commit run --all-files` (or `make pre-commit`) and the project’s tests. Fix failures and report the results before publishing or updating the PR.
+For Python projects using this configuration, run `make check`, which runs all pre-commit hooks against all files and the tests. Fix failures and report the results before publishing or updating the PR.
 
 ## Local commands and exceptions
 

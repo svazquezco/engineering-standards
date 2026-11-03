@@ -23,7 +23,7 @@ Personal engineering standards for applications, tools, and libraries. This repo
 
 ## Adopt
 
-Add the links from [templates/AGENTS.md](templates/AGENTS.md) to your project’s AGENTS.md. They point directly to the standards in this repository on `main`; keep the links relevant to your project. See [adoption](docs/adoption.md) for an example and references to a fixed version.
+Add the links from [templates/AGENTS.md](templates/AGENTS.md) to your project’s AGENTS.md and copy [templates/CLAUDE.md](templates/CLAUDE.md). The links are pinned to a published tag; keep the ones relevant to your project. [standards/index.json](standards/index.json) lists every standard for skills and tools. See [adoption](docs/adoption.md) for vendoring and upgrade options.
 
 For new Python projects, follow [initial setup](docs/python-projects.md) for uv, pytest, Ruff, Pyright, pre-commit, and CI.
 
