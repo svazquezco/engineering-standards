@@ -19,7 +19,7 @@ The initial release is `1.0.0`. Describe consumer migrations in breaking commits
 [release.yml](../.github/workflows/release.yml) uses Release Please to:
 
 1. Read Conventional Commits on `main`.
-2. Open or update a release PR containing the proposed VERSION, release manifest, and generated dated changelog entry.
+2. Open or update a release PR containing the proposed VERSION, release manifest, generated dated changelog entry, and the pinned tag in the template and documentation links (the `x-release-please-start-version` blocks).
 3. Publish the corresponding version tag and GitHub release after the release PR is reviewed, passes validation, and is merged with authorization.
 
 Do not add speculative version entries to CHANGELOG.md during normal development. The release PR contains the generated notes for review. Never move or overwrite a published tag; corrections use a new version and commit.
@@ -36,9 +36,11 @@ The workflow requires no manual version arithmetic or changelog entry writing. I
 
 After a version is published, projects can reference its fixed documentation snapshot:
 
+<!-- x-release-please-start-version -->
 ```text
 https://raw.githubusercontent.com/svazquezco/engineering-standards/v1.0.0/standards/python-coding.md
 ```
+<!-- x-release-please-end -->
 
 Use the same published tag for every standard in a consuming project. A full commit SHA also provides a fixed snapshot; `main` follows current changes. To upgrade, review the diff and migration notes, update all links together, and run the consuming project’s checks.
 

@@ -4,10 +4,12 @@ This repository is the shared source of engineering standards referenced by othe
 
 - `standards/` contains reusable rules, organized by topic and technology.
 - `templates/python/` contains initial Python tool settings, interpreter selection, Make and Compose entry points, and a consumer CI example.
-- `templates/AGENTS.md` provides ready-to-copy pinned links for a consuming project’s agent instructions; `templates/CLAUDE.md` imports it for Claude Code.
+- `templates/AGENTS.md` provides ready-to-copy pinned links for a consuming project’s agent instructions.
+- `templates/CLAUDE.md` imports AGENTS.md so Claude Code reads the same instructions.
 - `standards/index.json` is the machine-readable list of standards for skills and tools; keep it in sync with README.md.
 - `VERSION` and `CHANGELOG.md` track versions and generated release notes; published Git tags identify fixed snapshots.
 - `release-please-config.json` and `.release-please-manifest.json` configure automated version proposals and publication.
+- `scripts/check_index.py` verifies that `standards/index.json` and README.md list every standard.
 - `Makefile` provides local and CI validation entry points; releases reuse the same pre-commit validation workflow.
 - `docs/` explains how to reference and maintain the standards.
 

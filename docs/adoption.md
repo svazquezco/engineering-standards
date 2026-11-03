@@ -12,6 +12,7 @@ Skills and tools can discover the standards and their scopes from [standards/ind
 
 For example:
 
+<!-- x-release-please-start-version -->
 ```markdown
 ## Engineering standards
 
@@ -22,6 +23,7 @@ Read the relevant linked standards before working on a task:
 - [Python unit tests](https://raw.githubusercontent.com/svazquezco/engineering-standards/v1.0.0/standards/python-testing.md)
 - [Dependencies](https://raw.githubusercontent.com/svazquezco/engineering-standards/v1.0.0/standards/dependencies.md)
 ```
+<!-- x-release-please-end -->
 
 The standards stay in this repository. Reference them rather than copying their contents into each project. Keep project-specific setup, validation commands, and exceptions in the consuming project’s documentation. Agents must open and read the relevant links; if access fails, they must report it.
 
@@ -31,11 +33,13 @@ Follow [Start a Python project](python-projects.md) to initialize metadata with 
 
 ## Reference a fixed version
 
+<!-- x-release-please-start-version -->
 Templates pin every link to the same published tag, such as `v1.0.0`:
 
 ```text
 https://raw.githubusercontent.com/svazquezco/engineering-standards/v1.0.0/standards/documentation.md
 ```
+<!-- x-release-please-end -->
 
 Check the repository’s published tags before choosing a version. See [versioning](versioning.md) for publication and upgrade steps.
 

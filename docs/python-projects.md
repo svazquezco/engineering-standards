@@ -14,7 +14,7 @@ The example uses the project title `ExampleApp`, distribution name `example-app`
 
 For a reusable library, use `uv init --lib --build-backend uv --name example-app --python 3.14` instead. Move the generated `src/example_app/` package to `example_app/` in the repository root and remove the now-empty `src/` directory. Keep the generated build-system configuration. The template sets `module-root = ""` and `module-name = "example_app"` for uv’s build backend; replace the module name with the actual package name. Other backends need their equivalent flat-layout configuration.
 
-Merge [templates/python/pyproject.toml](../templates/python/pyproject.toml) into the project’s pyproject.toml. Keep its existing metadata and merge tables rather than overwriting them. The development dependency ranges were checked when this template was prepared; review available versions when starting a project. Copy [.python-version](../templates/python/.python-version) to the project root.
+Merge [templates/python/pyproject.toml](../templates/python/pyproject.toml) into the project’s pyproject.toml. Keep its existing metadata and merge tables rather than overwriting them. Dependabot updates only the template’s Dockerfile base image; review the development dependency ranges, the remote pre-commit-hooks revision, and the CI action pins in the template at each release, and review available versions when starting a project. Copy [.python-version](../templates/python/.python-version) to the project root.
 
 The initial interpreter is Python 3.14. Choose and document the supported Python range for the actual project; keep `requires-python`, .python-version, package compatibility, and CI aligned. Ruff derives its target version from `requires-python`; Pyright uses the configured environment’s interpreter.
 
@@ -47,7 +47,7 @@ Copy [.pre-commit-config.yaml](../templates/python/.pre-commit-config.yaml) to t
 make hooks-install
 ```
 
-Pre-commit requires a Git repository. Initialize Git if the project is not already a checkout. Before publishing or updating a PR, agents must run `make check`, fix failures, and report the result. This is required even when automatic commit hooks are installed.
+The hooks run locally on every commit; CI runs the same hooks through `make check` to verify that the rules were applied. Pre-commit requires a Git repository. Initialize Git if the project is not already a checkout. Before publishing or updating a PR, agents must run `make check`, fix failures, and report the result. This is required even when automatic commit hooks are installed.
 
 The full validation commands are:
 

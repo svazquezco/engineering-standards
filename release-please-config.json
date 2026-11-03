@@ -58,6 +58,20 @@
           "section": "Reverts",
           "hidden": false
         }
+      ],
+      "extra-files": [
+        {
+          "type": "generic",
+          "path": "templates/AGENTS.md"
+        },
+        {
+          "type": "generic",
+          "path": "docs/adoption.md"
+        },
+        {
+          "type": "generic",
+          "path": "docs/versioning.md"
+        }
       ]
     }
   }
