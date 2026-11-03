@@ -3,6 +3,8 @@
 UV ?= uv
 COMPOSE ?= docker compose
 UV_GROUPS ?= --all-groups
+export UV UV_GROUPS
+
 UV_RUN = $(UV) run --locked $(UV_GROUPS)
 
 .PHONY: $(shell awk -F: '/^[a-zA-Z0-9_-]+:([^=]|$$)/ {print $$1}' $(MAKEFILE_LIST))
