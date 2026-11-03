@@ -1,6 +1,14 @@
 # Reference these standards
 
-Add the relevant links from [templates/AGENTS.md](../templates/AGENTS.md) to the consuming project’s AGENTS.md. Keep its existing project instructions.
+Add the relevant links from [templates/AGENTS.md](../templates/AGENTS.md) to the consuming project’s AGENTS.md. Keep its existing project instructions. Copy [templates/CLAUDE.md](../templates/CLAUDE.md) as well: Claude Code reads CLAUDE.md, which imports AGENTS.md.
+
+Reference the standards in one of these ways, in order of preference:
+
+1. **Vendored copy at a tag.** Add this repository as a Git submodule (or subtree) checked out at a published tag and link to local paths. Agents and skills read the files without network access.
+2. **Raw URLs pinned to a tag.** Use `https://raw.githubusercontent.com/svazquezco/engineering-standards/<tag>/standards/<file>.md`. Raw URLs return Markdown; `github.com/.../blob/...` URLs return an HTML page.
+3. **`main`.** Only for projects that deliberately follow unreleased changes.
+
+Skills and tools can discover the standards and their scopes from [standards/index.json](../standards/index.json).
 
 For example:
 
@@ -9,10 +17,10 @@ For example:
 
 Read the relevant linked standards before working on a task:
 
-- [Documentation](https://github.com/svazquezco/engineering-standards/blob/main/standards/documentation.md)
-- [Python coding](https://github.com/svazquezco/engineering-standards/blob/main/standards/python-coding.md)
-- [Python unit tests](https://github.com/svazquezco/engineering-standards/blob/main/standards/python-testing.md)
-- [Dependencies](https://github.com/svazquezco/engineering-standards/blob/main/standards/dependencies.md)
+- [Documentation](https://raw.githubusercontent.com/svazquezco/engineering-standards/v1.0.0/standards/documentation.md)
+- [Python coding](https://raw.githubusercontent.com/svazquezco/engineering-standards/v1.0.0/standards/python-coding.md)
+- [Python unit tests](https://raw.githubusercontent.com/svazquezco/engineering-standards/v1.0.0/standards/python-testing.md)
+- [Dependencies](https://raw.githubusercontent.com/svazquezco/engineering-standards/v1.0.0/standards/dependencies.md)
 ```
 
 The standards stay in this repository. Reference them rather than copying their contents into each project. Keep project-specific setup, validation commands, and exceptions in the consuming project’s documentation. Agents must open and read the relevant links; if access fails, they must report it.
@@ -23,17 +31,17 @@ Follow [Start a Python project](python-projects.md) to initialize metadata with 
 
 ## Reference a fixed version
 
-To keep a project on a specific documentation version, replace `main` in every standards URL with the same published tag, such as `v1.0.0`. For example, after that tag is published:
+Templates pin every link to the same published tag, such as `v1.0.0`:
 
 ```text
-https://github.com/svazquezco/engineering-standards/blob/v1.0.0/standards/documentation.md
+https://raw.githubusercontent.com/svazquezco/engineering-standards/v1.0.0/standards/documentation.md
 ```
 
 Check the repository’s published tags before choosing a version. See [versioning](versioning.md) for publication and upgrade steps.
 
 ## Following updates
 
-Links to `main` follow the current standards. Changes here become available to all projects using those links the next time the documents are read.
+Links to `main` follow the current standards, including breaking changes, the next time the documents are read. Prefer a pinned tag.
 
 Projects using a fixed tag or commit SHA upgrade explicitly: review the changes and migration steps, update all standards references together, and run the project’s validation commands.
 

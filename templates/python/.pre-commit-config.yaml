@@ -9,15 +9,21 @@ repos:
       - id: check-yaml
       - id: end-of-file-fixer
       - id: trailing-whitespace
-  - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.17.3
+  - repo: local
     hooks:
       - id: ruff-check
+        name: Ruff lint
+        entry: uv run --locked ruff check
+        language: system
+        types_or: [python, pyi]
       - id: ruff-format
-        args: [--check]
-  - repo: https://github.com/RobertCraigie/pyright-python
-    rev: v1.1.414
-    hooks:
+        name: Ruff format
+        entry: uv run --locked ruff format --check
+        language: system
+        types_or: [python, pyi]
       - id: pyright
+        name: Pyright
+        entry: uv run --locked pyright
+        language: system
         pass_filenames: false
         always_run: true

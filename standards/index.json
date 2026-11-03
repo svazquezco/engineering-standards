@@ -1,0 +1,18 @@
+{
+  "standards": [
+    {"id": "planning", "title": "Planning", "path": "standards/planning.md", "scope": "Engineering change planning", "applies_to": ["all"]},
+    {"id": "development", "title": "Development", "path": "standards/development.md", "scope": "Implementation and handoff", "applies_to": ["all"]},
+    {"id": "security", "title": "Security", "path": "standards/security.md", "scope": "Repositories, tooling, and data", "applies_to": ["all"]},
+    {"id": "cli", "title": "CLI", "path": "standards/cli.md", "scope": "Command-line tools", "applies_to": ["cli"]},
+    {"id": "documentation", "title": "Documentation", "path": "standards/documentation.md", "scope": "All repositories", "applies_to": ["all"]},
+    {"id": "branching", "title": "Branching", "path": "standards/branching.md", "scope": "Git workflows", "applies_to": ["git"]},
+    {"id": "commit-messages", "title": "Commit messages", "path": "standards/commit-messages.md", "scope": "Git commits", "applies_to": ["git"]},
+    {"id": "pull-requests", "title": "Pull requests", "path": "standards/pull-requests.md", "scope": "Reviewed changes", "applies_to": ["git"]},
+    {"id": "testing", "title": "Testing", "path": "standards/testing.md", "scope": "Executable projects", "applies_to": ["all"]},
+    {"id": "python-coding", "title": "Python coding", "path": "standards/python-coding.md", "scope": "Python source code", "applies_to": ["python"]},
+    {"id": "python-testing", "title": "Python unit tests", "path": "standards/python-testing.md", "scope": "Python unit tests", "applies_to": ["python"]},
+    {"id": "dependencies", "title": "Dependencies", "path": "standards/dependencies.md", "scope": "Python dependency management", "applies_to": ["python"]},
+    {"id": "error-handling", "title": "Error handling", "path": "standards/error-handling.md", "scope": "Python exception contracts", "applies_to": ["python"]},
+    {"id": "makefiles", "title": "Makefiles", "path": "standards/makefiles.md", "scope": "Projects using Make", "applies_to": ["make"]}
+  ]
+}

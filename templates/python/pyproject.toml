@@ -3,6 +3,7 @@ dev = [
     "pre-commit==4.7.*",
     "pyright==1.1.*",
     "pytest==9.2.*",
+    "pytest-mock==3.17.*",
     "ruff==0.17.*",
 ]
 
@@ -49,10 +50,13 @@ ignore = [
     "ANN003", # Test and fixture keyword arguments remain unannotated.
     "ANN201", # Test and fixture return values remain unannotated.
     "ANN202", # Fixture factories remain unannotated.
+    "ARG001", # Fixtures requested only for their side effects stay unused.
     "D103",   # Use descriptive test and fixture names instead of docstrings.
+    "INP001", # Tests are not a package; pytest uses --import-mode=importlib.
+    "PLR2004", # Expected values in assertions are literal.
     "S101",   # Assertions are the pytest assertion mechanism.
 ]
-"**/conftest.py" = ["ANN001", "ANN002", "ANN003", "ANN201", "ANN202", "D103"]
+"**/conftest.py" = ["ANN001", "ANN002", "ANN003", "ANN201", "ANN202", "D103", "INP001"]
 
 [tool.ruff.lint.pydocstyle]
 convention = "google"
