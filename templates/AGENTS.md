@@ -12,25 +12,25 @@ Keep the project’s purpose and main components in its existing documentation.
 ## Shared standards
 
 <!-- x-release-please-start-version -->
-Read the relevant linked standards before working on a task. The links are pinned to the published tag `v1.0.1`; to upgrade, replace that tag in every URL together. If the project vendors the standards (for example as a Git submodule), use the local paths instead. If they cannot be accessed, report the limitation.
+Read the relevant linked standards before working on a task. The links are pinned to the published tag `v1.0.2`; to upgrade, replace that tag in every URL together. If the project vendors the standards (for example as a Git submodule), use the local paths instead. If they cannot be accessed, report the limitation.
 
-- [Planning](https://raw.githubusercontent.com/svazquezco/engineering-standards/v1.0.1/standards/planning.md)
-- [Development](https://raw.githubusercontent.com/svazquezco/engineering-standards/v1.0.1/standards/development.md)
-- [Security](https://raw.githubusercontent.com/svazquezco/engineering-standards/v1.0.1/standards/security.md)
-- [Documentation](https://raw.githubusercontent.com/svazquezco/engineering-standards/v1.0.1/standards/documentation.md)
-- [Branching](https://raw.githubusercontent.com/svazquezco/engineering-standards/v1.0.1/standards/branching.md)
-- [Commits](https://raw.githubusercontent.com/svazquezco/engineering-standards/v1.0.1/standards/commit-messages.md)
-- [Pull requests](https://raw.githubusercontent.com/svazquezco/engineering-standards/v1.0.1/standards/pull-requests.md)
-- [Testing](https://raw.githubusercontent.com/svazquezco/engineering-standards/v1.0.1/standards/testing.md)
+- [Planning](https://raw.githubusercontent.com/svazquezco/engineering-standards/v1.0.2/standards/planning.md)
+- [Development](https://raw.githubusercontent.com/svazquezco/engineering-standards/v1.0.2/standards/development.md)
+- [Security](https://raw.githubusercontent.com/svazquezco/engineering-standards/v1.0.2/standards/security.md)
+- [Documentation](https://raw.githubusercontent.com/svazquezco/engineering-standards/v1.0.2/standards/documentation.md)
+- [Branching](https://raw.githubusercontent.com/svazquezco/engineering-standards/v1.0.2/standards/branching.md)
+- [Commits](https://raw.githubusercontent.com/svazquezco/engineering-standards/v1.0.2/standards/commit-messages.md)
+- [Pull requests](https://raw.githubusercontent.com/svazquezco/engineering-standards/v1.0.2/standards/pull-requests.md)
+- [Testing](https://raw.githubusercontent.com/svazquezco/engineering-standards/v1.0.2/standards/testing.md)
 
 For Python projects, also adopt:
 
-- [Python](https://raw.githubusercontent.com/svazquezco/engineering-standards/v1.0.1/standards/python-coding.md)
-- [Python tests](https://raw.githubusercontent.com/svazquezco/engineering-standards/v1.0.1/standards/python-testing.md)
-- [Dependencies](https://raw.githubusercontent.com/svazquezco/engineering-standards/v1.0.1/standards/dependencies.md)
-- [Error handling](https://raw.githubusercontent.com/svazquezco/engineering-standards/v1.0.1/standards/error-handling.md)
+- [Python](https://raw.githubusercontent.com/svazquezco/engineering-standards/v1.0.2/standards/python-coding.md)
+- [Python tests](https://raw.githubusercontent.com/svazquezco/engineering-standards/v1.0.2/standards/python-testing.md)
+- [Dependencies](https://raw.githubusercontent.com/svazquezco/engineering-standards/v1.0.2/standards/dependencies.md)
+- [Error handling](https://raw.githubusercontent.com/svazquezco/engineering-standards/v1.0.2/standards/error-handling.md)
 
-Also reference [CLI](https://raw.githubusercontent.com/svazquezco/engineering-standards/v1.0.1/standards/cli.md) and [Makefiles](https://raw.githubusercontent.com/svazquezco/engineering-standards/v1.0.1/standards/makefiles.md) when applicable.
+Also reference [CLI](https://raw.githubusercontent.com/svazquezco/engineering-standards/v1.0.2/standards/cli.md) and [Makefiles](https://raw.githubusercontent.com/svazquezco/engineering-standards/v1.0.1/standards/makefiles.md) when applicable.
 <!-- x-release-please-end -->
 
 ## Before publishing or updating a PR

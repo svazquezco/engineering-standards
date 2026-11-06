@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.0.2](https://github.com/svazquezco/engineering-standards/compare/v1.0.1...v1.0.2) (2026-11-06)
+
+
+### Fixes
+
+* **templates:** preserve uv configuration in hooks ([efc5006](https://github.com/svazquezco/engineering-standards/commit/efc5006aa83ba6e0911c61714aaf1b68a9b378ca))
+* **templates:** preserve uv configuration in hooks ([786d195](https://github.com/svazquezco/engineering-standards/commit/786d1951709a05844131e5870e434a52de400f7b))
+
 ## [1.0.1](https://github.com/svazquezco/engineering-standards/compare/v1.0.0...v1.0.1) (2026-11-03)
 
 

@@ -38,7 +38,7 @@ After a version is published, projects can reference its fixed documentation sna
 
 <!-- x-release-please-start-version -->
 ```text
-https://raw.githubusercontent.com/svazquezco/engineering-standards/v1.0.1/standards/python-coding.md
+https://raw.githubusercontent.com/svazquezco/engineering-standards/v1.0.2/standards/python-coding.md
 ```
 <!-- x-release-please-end -->
 
