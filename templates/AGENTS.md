@@ -30,7 +30,7 @@ For Python projects, also adopt:
 - [Dependencies](https://raw.githubusercontent.com/svazquezco/engineering-standards/v1.0.1/standards/dependencies.md)
 - [Error handling](https://raw.githubusercontent.com/svazquezco/engineering-standards/v1.0.1/standards/error-handling.md)
 
-Also reference [CLI](https://raw.githubusercontent.com/svazquezco/engineering-standards/v1.0.1/standards/cli.md) and [Makefiles](https://raw.githubusercontent.com/svazquezco/engineering-standards/v1.0.0/standards/makefiles.md) when applicable.
+Also reference [CLI](https://raw.githubusercontent.com/svazquezco/engineering-standards/v1.0.1/standards/cli.md) and [Makefiles](https://raw.githubusercontent.com/svazquezco/engineering-standards/v1.0.1/standards/makefiles.md) when applicable.
 <!-- x-release-please-end -->
 
 ## Before publishing or updating a PR

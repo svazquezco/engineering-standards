@@ -41,7 +41,7 @@ uv sync --locked --all-groups
 
 Copy [Makefile](../templates/python/Makefile) to the project root. Run `make help` to see the available targets. `make sync` installs the project and all dependency groups from the lockfile; `make lock` intentionally updates the lockfile, and `make format` formats code. `make check` runs all pre-commit hooks and the tests; CI calls the same target.
 
-Copy [.pre-commit-config.yaml](../templates/python/.pre-commit-config.yaml) to the project root. Ruff and Pyright run as local hooks through `uv run --locked`, so their versions come from uv.lock; only the general file-check hooks pin a remote revision. Install the Git hooks once after cloning:
+Copy [.pre-commit-config.yaml](../templates/python/.pre-commit-config.yaml) to the project root. Ruff and Pyright run as local hooks through the Make targets, which use `UV` and `UV_GROUPS` consistently and take tool versions from uv.lock; only the general file-check hooks pin a remote revision. Make exports these variables to hook subprocesses. For hooks invoked directly by Git, export any project-specific overrides in the shell as well. Install the Git hooks once after cloning:
 
 ```sh
 make hooks-install
