@@ -29,7 +29,8 @@ Add the links from [templates/AGENTS.md](templates/AGENTS.md) to your project’
 AGENTS.md and copy [templates/CLAUDE.md](templates/CLAUDE.md). The links are
 pinned to a published tag; keep the ones relevant to your project.
 [standards/index.json](standards/index.json) lists every standard for skills and
-tools. See [adoption](docs/adoption.md) for vendoring and upgrade options.
+tools. Use the [interactive adoption setup](docs/adoption.md#set-up-a-new-project)
+for a new project. The adoption guide also covers manual setup and upgrades.
 
 For new Python projects, follow [initial setup](docs/python-projects.md) for uv,
 pytest, Ruff, Pyright, pre-commit, and CI.
