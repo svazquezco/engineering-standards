@@ -15,7 +15,10 @@ Scope: all repositories.
   a fixed baseline. Document local behavior and exceptions without duplicating
   shared policy.
 - Keep tool-specific instruction files thin, pointing to AGENTS.md.
-- Use focused documents, predictable names, and short valid examples. State
-  requirements with must, should, or may.
+- Use focused documents, predictable names, and short valid examples.
+- State new or revised policy using `must` for obligations, `must not` for
+  prohibitions, `should` for recommendations, and `may` for permissions. An
+  exception to a mandatory rule must have an explicit condition. Introduce
+  examples separately from requirements.
 - Update affected documentation in the same change as behavior. Do not describe
   planned features as available.

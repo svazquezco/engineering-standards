@@ -25,8 +25,12 @@ Scope: projects exposing command-line interfaces.
 - Commands must work in every environment the project claims to support. When
   the application ships in a container, verify the documented command and help
   output inside that container as well as on the supported development path.
-- Pass subprocess arguments as a structured list when possible. Validate paths
-  and identifiers, bound waits, and propagate actionable failures.
+- Pass subprocess arguments as a structured list with shell interpretation
+  disabled. Use a shell only when shell syntax is required or the target
+  platform requires it. Document the requirement and pass external values as
+  separate arguments or environment variables. Never interpolate them into shell
+  source. Validate paths and identifiers, bound waits, and propagate actionable
+  failures.
 - Test argument validation, help, successful output, and failure exit statuses.
   Keep outbound operations isolated from tests.
 

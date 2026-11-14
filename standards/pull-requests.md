@@ -9,8 +9,10 @@ Scope: changes submitted for review.
   limitations. Include migration steps for incompatible changes.
 - Prepare the complete description before creating a ready PR. Use a draft when
   required context or validation is still missing.
-- Prefer small, focused changes and a single coherent commit. Multiple commits
-  are acceptable when they improve review. Avoid unrelated cleanup.
+- Each PR must deliver one independently reviewable outcome and contain exactly
+  one change commit relative to its base. Put unrelated changes in separate PRs.
+  If repository policy requires separate commits, document that requirement in
+  the PR description.
 - Keep your branch history linear and follow [branching](branching.md) when
   updating it.
 - Before publishing or updating a PR, agents must run the project’s configured
