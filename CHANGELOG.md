@@ -1,5 +1,19 @@
 # Changelog
 
+## [1.1.0](https://github.com/svazquezco/engineering-standards/compare/v1.0.1...v1.1.0) (2026-11-14)
+
+
+### Features
+
+* refine Python exception and layout standards ([a8d7b04](https://github.com/svazquezco/engineering-standards/commit/a8d7b0460a7f87fce679a250aab4fbb8e6ba95a3))
+* refine Python exception and layout standards ([660c8a3](https://github.com/svazquezco/engineering-standards/commit/660c8a3f04109e6320ea0fbe9a7d0fe42a3083d2))
+
+
+### Fixes
+
+* **templates:** preserve uv configuration in hooks ([efc5006](https://github.com/svazquezco/engineering-standards/commit/efc5006aa83ba6e0911c61714aaf1b68a9b378ca))
+* **templates:** preserve uv configuration in hooks ([786d195](https://github.com/svazquezco/engineering-standards/commit/786d1951709a05844131e5870e434a52de400f7b))
+
 ## [1.0.1](https://github.com/svazquezco/engineering-standards/compare/v1.0.0...v1.0.1) (2026-11-03)
 
 
