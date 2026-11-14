@@ -14,7 +14,7 @@ Scope: Python source code. Unit tests follow [Python testing](python-testing.md)
 - Within a class, use this top-to-bottom order: class attributes, construction methods (`__new__`, `__init__`), other special methods, properties, public methods, protected methods (`_name`), and private methods (`__name`). Sort names alphabetically within each group. Keep property setters and deleters beside their getter. Preserve ordering required by execution or framework behavior.
 - Inject external clients at integration boundaries. Keep helpers on a class when they serve only that class; use module functions for shared behavior.
 - Prefer `pathlib`, UTF-8 text, and context managers for filesystem operations.
-- Put the production package directly in the repository root, using the project name in snake_case (for example, `ExampleApp` uses `example_app/`). Keep `tests/` alongside it and mirror the package structure there.
+- For applications and tools, put the production package directly in the repository root. Reusable libraries may place it under `src/` or use the flat layout. In both layouts, use the project name in snake_case (for example, `ExampleApp` uses `example_app`). Keep `tests/` at the repository root and mirror the package structure there.
 - Group related modules by responsibility. Avoid generic utils modules accumulating unrelated behavior.
 - Prefer simple, intention-revealing names and explicit control flow.
 - Correct findings instead of disabling checks. If a suppression is unavoidable, scope it to one rule and explain the reason beside it.

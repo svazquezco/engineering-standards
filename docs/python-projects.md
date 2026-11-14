@@ -12,13 +12,13 @@ uv init --bare --name example-app --python 3.14
 
 The example uses the project title `ExampleApp`, distribution name `example-app`, and Python package `example_app`. Use the equivalent names for the actual project.
 
-For a reusable library, use `uv init --lib --build-backend uv --name example-app --python 3.14` instead. Move the generated `src/example_app/` package to `example_app/` in the repository root and remove the now-empty `src/` directory. Keep the generated build-system configuration. The template sets `module-root = ""` and `module-name = "example_app"` for uv’s build backend; replace the module name with the actual package name. Other backends need their equivalent flat-layout configuration.
+For a reusable library, use `uv init --lib --build-backend uv --name example-app --python 3.14`. Keep the generated build-system configuration and `src/example_app/` package. When merging the template for this layout, omit its `[tool.uv.build-backend]` table so uv uses its default package discovery under `src/`. Set Pyright's `include` to `["src/example_app"]` and omit pytest's `pythonpath` setting so tests import the package installed by uv. For a flat-layout library, move the package to the repository root and use the template's build-backend settings with the actual package name.
 
 Merge [templates/python/pyproject.toml](../templates/python/pyproject.toml) into the project’s pyproject.toml. Keep its existing metadata and merge tables rather than overwriting them. Dependabot updates only the template’s Dockerfile base image; review the development dependency ranges, the remote pre-commit-hooks revision, and the CI action pins in the template at each release, and review available versions when starting a project. Copy [.python-version](../templates/python/.python-version) to the project root.
 
 The initial interpreter is Python 3.14. Choose and document the supported Python range for the actual project; keep `requires-python`, .python-version, package compatibility, and CI aligned. Ruff derives its target version from `requires-python`; Pyright uses the configured environment’s interpreter.
 
-Create production code directly under `example_app/` and behavioral tests under `tests/`, mirroring the package structure. Replace `example_app` in Pyright’s include list and uv’s module name with the actual package name. Do not add empty example tests only to make CI pass. Keep fixture definitions in the narrowest useful conftest.py.
+Create production code under `example_app/` for the flat layout or `src/example_app/` for the src layout. Keep behavioral tests under `tests/`, mirroring the package structure. Update Pyright’s include list and any explicit uv module name for the actual package. Do not add empty example tests only to make CI pass. Keep fixture definitions in the narrowest useful conftest.py.
 
 ```text
 ExampleApp/
@@ -76,7 +76,7 @@ The development image includes uv, Git, Make, and the system library needed by P
 
 ## Configuration boundaries
 
-Pyright checks production code under `example_app/` in strict mode. Tests, fixtures, and fixture factories do not require annotations. Production modules must not import from tests, which would pull test code into production type analysis. Projects with other production paths must add them to Pyright’s include list.
+Pyright checks the configured production package in strict mode. Tests, fixtures, and fixture factories do not require annotations. Production modules must not import from tests, which would pull test code into production type analysis. Projects with other production paths must add them to Pyright’s include list.
 
 Ruff selects ALL, uses Google-style docstrings, and delegates formatting choices to its formatter. The template excludes module/package docstring requirements, annotation and function-docstring requirements in tests/fixtures, and the assertion, unused-fixture-argument, magic-value, and implicit-namespace-package warnings in tests. Formatter-conflicting indentation, quote, and comma checks are also excluded. The Google convention excludes incompatible docstring styles. ALL also includes copyright-notice checks: use accurate ownership notices where required rather than fabricated attribution. Other rule findings must be fixed or receive a documented, narrowly scoped exception.
 
