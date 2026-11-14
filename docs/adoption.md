@@ -5,15 +5,40 @@ consuming project’s AGENTS.md. Keep its existing project instructions. Copy
 [templates/CLAUDE.md](../templates/CLAUDE.md) as well: Claude Code reads
 CLAUDE.md, which imports AGENTS.md.
 
-Reference the standards in one of these ways, in order of preference:
+## Choose an adoption method
 
-1. **Vendored copy at a tag.** Add this repository as a Git submodule (or
-   subtree) checked out at a published tag and link to local paths. Agents and
-   skills read the files without network access.
-2. **Raw URLs pinned to a tag.** Use
-   `https://raw.githubusercontent.com/svazquezco/engineering-standards/<tag>/standards/<file>.md`.
-   Raw URLs return Markdown; `github.com/.../blob/...` URLs return an HTML page.
-3. **`main`.** Only for projects that deliberately follow unreleased changes.
+1. **Pinned links (default).** Use raw Markdown URLs pinned to one published
+   tag or full commit SHA when people and agents can access the central
+   repository. Use the same reference in every link.
+2. **Git subtree.** Choose this when every checkout must include the standards.
+   Import the selected revision under `vendor/engineering-standards/` and link
+   to local paths. Keep project-specific exceptions outside that directory.
+3. **Git submodule.** Choose this when you control checkout setup and want to
+   track the exact upstream commit separately. Initialize the submodule in fresh
+   clones with `git submodule update --init --recursive`.
+
+Use links to `main` only when a project deliberately tracks unreleased changes.
+Plugins can automate setup and use the references declared by the project.
+
+## Set up a new project
+
+From the new project's root, run the following script from a checkout of this
+repository. It asks which adoption method to use and creates `AGENTS.md` with
+the corresponding links. It also creates `CLAUDE.md` if it is missing.
+
+```sh
+sh /path/to/engineering-standards/templates/bootstrap/adopt-standards.sh
+```
+
+Pass `links`, `subtree`, or `submodule` to select the method non-interactively.
+The script uses the published tag in the bundled template. The subtree option
+requires a clean Git checkout with an initial commit and creates import commits.
+The submodule option initializes the upstream checkout and stages `.gitmodules`
+and the pinned commit. Both options require access to the upstream repository
+during setup. Review and commit the generated project files.
+
+If `AGENTS.md` already exists, add the relevant template references manually
+to preserve the project's instructions.
 
 Skills and tools can discover the standards and their scopes from
 [standards/index.json](../standards/index.json).
@@ -35,8 +60,8 @@ Read the relevant linked standards before working on a task:
 
 <!-- x-release-please-end -->
 
-The standards stay in this repository. Reference them rather than copying their
-contents into each project. Keep project-specific setup, validation commands,
+This repository is the canonical source. Keep vendored copies tied to a
+published revision. Keep project-specific setup, validation commands,
 and exceptions in the consuming project’s documentation. Agents must open and
 read the relevant links; if access fails, they must report it.
 

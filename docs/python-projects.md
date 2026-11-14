@@ -241,7 +241,7 @@ Relevant references:
 [Pyright configuration](https://github.com/microsoft/pyright/blob/main/docs/configuration.md),
 and [uv CI](https://docs.astral.sh/uv/guides/integration/github/).
 
-Add the relevant links from [templates/AGENTS.md](../templates/AGENTS.md) to the
-project’s agent instructions, copy
-[templates/CLAUDE.md](../templates/CLAUDE.md), and document its exact setup,
-checks, and exceptions locally.
+Run the [standards adoption setup](adoption.md#set-up-a-new-project) to choose
+pinned links, a subtree, or a submodule for the new project. Keep the applicable
+references in the generated agent instructions and document the project's exact
+setup, checks, and exceptions locally.
