@@ -41,11 +41,13 @@ range for the actual project; keep `requires-python`, .python-version, package
 compatibility, and CI aligned. Ruff derives its target version from
 `requires-python`; Pyright uses the configured environment’s interpreter.
 
-Create production code under `example_app/` for the flat layout or
-`src/example_app/` for the src layout. Keep behavioral tests under `tests/`,
-mirroring the package structure. Update Pyright’s include list and any explicit
-uv module name for the actual package. Do not add empty example tests only to
-make CI pass. Keep fixture definitions in the narrowest useful conftest.py.
+For a framework application, use the matching setup below. For other projects,
+create production code under `example_app/` for the flat layout or
+`src/example_app/` for the src layout. In either case, keep behavioral tests
+under `tests/`, mirroring the package structure. Update Pyright’s include list
+and any explicit uv module name for the actual package. Do not add empty example
+tests only to make CI pass. Keep fixture definitions in the narrowest useful
+conftest.py.
 
 ```text
 ExampleApp/
@@ -57,6 +59,64 @@ ExampleApp/
 └── uv.lock
 ```
 
+## Scaffold a framework application
+
+Run the chosen setup from the new project's root after `uv init --bare` and
+before creating its production package. Replace `example_app` with the project's
+Python package name. Choose a compatible minor release for each dependency and
+replace `MAJOR.MINOR` in the commands.
+
+### FastAPI
+
+Use Copier 9.17 or later in the 9.x series. Replace
+`/path/to/engineering-standards` with the checkout containing the template. Omit
+`--defaults` and the `--data` options to select the Copier profile and enter the
+package name interactively.
+
+```sh
+uv add 'fastapi[standard]==MAJOR.MINOR.*'
+copier copy --defaults --data framework=fastapi --data package_name=example_app \
+  /path/to/engineering-standards/templates/python/framework .
+uv run fastapi dev example_app/main.py
+```
+
+The template creates `example_app/main.py` with a FastAPI instance and a
+`routers/` package for route modules. Add routers with `app.include_router()` as
+the API grows. See [FastAPI's multi-file layout][fastapi-layout].
+
+### Django
+
+```sh
+uv add 'django==MAJOR.MINOR.*'
+uv run django-admin startproject example_app .
+uv run python manage.py check
+```
+
+Django creates `manage.py` at the root and the settings, URL configuration,
+ASGI, and WSGI modules in `example_app/`. Create feature apps with
+`uv run python manage.py startapp feature_name` when needed. Include `manage.py`
+and the feature packages in Pyright's production scope. See [Django's project
+and app tutorial][django-layout].
+
+### FastMCP
+
+Use the same Copier installation and template path as for FastAPI.
+
+```sh
+uv add 'fastmcp==MAJOR.MINOR.*'
+copier copy --defaults --data framework=fastmcp --data package_name=example_app \
+  /path/to/engineering-standards/templates/python/framework .
+uv run fastmcp run example_app/server.py:mcp
+```
+
+The template creates `example_app/server.py` with a FastMCP instance for
+registering tools, resources, and prompts. The command serves MCP over stdio.
+See the [FastMCP quickstart][fastmcp-layout].
+
+[fastapi-layout]: https://fastapi.tiangolo.com/tutorial/bigger-applications/
+[django-layout]: https://docs.djangoproject.com/en/stable/intro/tutorial01/
+[fastmcp-layout]: https://gofastmcp.com/
+
 ## Install and validate
 
 Generate the project’s own lockfile, install development tools, and commit
@@ -67,17 +127,18 @@ uv lock
 uv sync --locked --all-groups
 ```
 
-Copy [Makefile](../templates/python/Makefile) to the project root. Run
-`make help` to see the available targets. `make sync` installs the project and
-all dependency groups from the lockfile; `make lock` intentionally updates the
-lockfile, and `make format` formats code. `make check` runs all pre-commit hooks
-and the tests; CI calls the same target.
+Copy [Makefile](../templates/python/Makefile) and the `make/` directory to the
+project root. Add `/make/local.mk` to the project’s `.gitignore` for personal
+targets. Run `make help` to see the available targets. `make sync` installs the
+project and all dependency groups from the lockfile; `make lock` intentionally
+updates the lockfile, and `make format` formats code. `make check` runs all
+pre-commit hooks and the tests; CI calls the same target.
 
 Copy [.pre-commit-config.yaml](../templates/python/.pre-commit-config.yaml) to
 the project root. Ruff and Pyright run as local hooks through the Make targets,
-which use `UV` and `UV_GROUPS` consistently and take tool versions from uv.lock;
-only the general file-check hooks pin a remote revision. Make exports these
-variables to hook subprocesses. For hooks invoked directly by Git, export any
+which run the tools in Compose using versions from uv.lock. The pre-commit
+runner and general file checks run on the host. Make exports `UV` and
+`UV_GROUPS` to hook subprocesses. For hooks invoked directly by Git, export any
 project-specific overrides in the shell as well. Install the Git hooks once
 after cloning:
 
@@ -108,8 +169,7 @@ Copy [checks.yml](../templates/python/checks.yml) to
 [dependabot.yml](../templates/python/dependabot.yml) to `.github/dependabot.yml`
 for projects using GitHub Actions. It synchronizes dependencies, caches
 pre-commit environments, and runs `make check`, the same target used locally.
-The initial checks run directly on the runner; use container-backed Make targets
-when the project needs its container runtime for validation. Configure a
+The runner needs Docker with Compose for code analysis and tests. Configure a
 runtime/platform matrix when the project supports more environments than the
 initial single Linux job.
 
@@ -118,18 +178,29 @@ initial single Linux job.
 Copy [compose.yml](../templates/python/compose.yml),
 [Dockerfile](../templates/python/Dockerfile), and
 [.dockerignore](../templates/python/.dockerignore) to the project root alongside
-the Makefile. Docker with Compose is required only for these targets.
+the Makefile. Docker with Compose is required for code analysis, formatting,
+tests, and running the app.
 
 ```sh
 make run
 ```
 
-The Compose `app` service installs the locked environment and runs
-`python -m example_app`. Implement the application’s entry point in
-`example_app/__main__.py` and replace the module name in compose.yml when naming
-the actual project. A reusable library only needs this service if it also
-provides a runnable application or CLI. Add ports, databases, and health checks
-only when the application needs them.
+The Compose `app` service installs the locked environment. Its default command
+runs `python -m example_app`. For a framework application, keep the
+`make sync && uv run --locked $$UV_GROUPS` prefix and replace the Python module
+command with the matching entry point:
+
+- FastAPI uses `fastapi run example_app/main.py --host 0.0.0.0`.
+- Django uses `python manage.py runserver 0.0.0.0:8000` for development.
+- FastMCP can use HTTP with
+  `fastmcp run example_app/server.py:mcp --transport http --host 0.0.0.0`.
+
+Map the chosen HTTP port in Compose when you need host access. For a generic
+module application, implement the entry point in `example_app/__main__.py` and
+replace the module name in compose.yml when naming the actual project. A
+reusable library only needs this service if it also provides a runnable
+application or CLI. Add ports, databases, and health checks only when the
+application needs them.
 
 The development image includes uv, Git, Make, and the system library needed by
 Pyright’s Node runtime. It trusts the mounted `/workspace` checkout for hook
