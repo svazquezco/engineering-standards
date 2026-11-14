@@ -19,6 +19,11 @@ Scope: Python applications, tools, and libraries.
   `==A.B.*`, such as `example==2.3.*`, allowing patch updates within the
   selected minor version. Use the same form for development dependencies in
   reusable libraries and packages.
+- New-project scaffolds may declare development and application runtime
+  dependencies without a fixed minor series to resolve the latest compatible
+  stable releases at creation. Commit the generated lockfile and use locked
+  installation and execution. The runtime bounds for reusable libraries still
+  apply.
 - Distinguish runtime, development, and optional dependencies. Avoid adding a
   dependency for a trivial operation the standard library handles clearly.
 - Review dependency and lockfile changes together. Run relevant checks after

@@ -1,11 +1,15 @@
 [dependency-groups]
 dev = [
-    "pre-commit==4.7.*",
-    "pyright==1.1.*",
-    "pytest==9.2.*",
-    "pytest-mock==3.17.*",
-    "ruff==0.17.*",
+    "pre-commit",
+    "pyright",
+    "pytest",
+    "pytest-mock",
+    "ruff",
 ]
+
+[tool.uv]
+resolution = "highest"
+prerelease = "disallow"
 
 [tool.pyright]
 include = ["example_app"]
@@ -30,6 +34,7 @@ ignore = [
     "D104", # Do not require package docstrings.
     "COM812", # Let the formatter manage trailing commas.
     "COM819", # Let the formatter manage trailing commas.
+    "D203", # Avoid conflict with class docstring spacing.
     "D206", # Let the formatter manage docstring indentation.
     "D300", # Let the formatter manage docstring quotes.
     "E111", # Let the formatter manage indentation.

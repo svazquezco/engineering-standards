@@ -8,7 +8,8 @@ configuration; the policy stays in the linked standards.
 
 ## Initialize
 
-For a new application, initialize its metadata and environment with:
+Use the uv version pinned in the [CI template](../templates/python/checks.yml)
+locally. Initialize the new application with the following command.
 
 ```sh
 uv init --bare --name example-app --python 3.14
@@ -31,9 +32,9 @@ package name.
 Merge [templates/python/pyproject.toml](../templates/python/pyproject.toml) into
 the project’s pyproject.toml. Keep its existing metadata and merge tables rather
 than overwriting them. Dependabot updates only the template’s Dockerfile base
-image; review the development dependency ranges, the remote pre-commit-hooks
-revision, and the CI action pins in the template at each release, and review
-available versions when starting a project. Copy
+image. Review the remote pre-commit-hooks revision and the CI action pins at
+each release. The template leaves development dependencies without a fixed minor
+series and configures uv to resolve the latest compatible stable versions. Copy
 [.python-version](../templates/python/.python-version) to the project root.
 
 The initial interpreter is Python 3.14. Choose and document the supported Python
@@ -63,8 +64,8 @@ ExampleApp/
 
 Run the chosen setup from the new project's root after `uv init --bare` and
 before creating its production package. Replace `example_app` with the project's
-Python package name. Choose a compatible minor release for each dependency and
-replace `MAJOR.MINOR` in the commands.
+Python package name. The framework commands resolve the latest compatible stable
+versions using the merged template settings.
 
 ### FastAPI
 
@@ -74,7 +75,7 @@ Use Copier 9.17 or later in the 9.x series. Replace
 package name interactively.
 
 ```sh
-uv add 'fastapi[standard]==MAJOR.MINOR.*'
+uv add 'fastapi[standard]'
 copier copy --defaults --data framework=fastapi --data package_name=example_app \
   /path/to/engineering-standards/templates/python/framework .
 uv run fastapi dev example_app/main.py
@@ -87,7 +88,7 @@ the API grows. See [FastAPI's multi-file layout][fastapi-layout].
 ### Django
 
 ```sh
-uv add 'django==MAJOR.MINOR.*'
+uv add django
 uv run django-admin startproject example_app .
 uv run python manage.py check
 ```
@@ -103,7 +104,7 @@ and app tutorial][django-layout].
 Use the same Copier installation and template path as for FastAPI.
 
 ```sh
-uv add 'fastmcp==MAJOR.MINOR.*'
+uv add fastmcp
 copier copy --defaults --data framework=fastmcp --data package_name=example_app \
   /path/to/engineering-standards/templates/python/framework .
 uv run fastmcp run example_app/server.py:mcp
@@ -120,12 +121,14 @@ See the [FastMCP quickstart][fastmcp-layout].
 ## Install and validate
 
 Generate the project’s own lockfile, install development tools, and commit
-uv.lock:
+`uv.lock` to reproduce the same versions on subsequent installations.
 
 ```sh
 uv lock
 uv sync --locked --all-groups
 ```
+
+Use `uv lock --upgrade` when intentionally updating dependencies.
 
 Copy [Makefile](../templates/python/Makefile) and the `make/` directory to the
 project root. Add `/make/local.mk` to the project’s `.gitignore` for personal
@@ -231,9 +234,12 @@ annotation and function-docstring requirements in tests/fixtures, and the
 assertion, unused-fixture-argument, magic-value, and implicit-namespace-package
 warnings in tests. Formatter-conflicting indentation, quote, and comma checks
 are also excluded. The Google convention excludes incompatible docstring styles.
-ALL also includes copyright-notice checks: use accurate ownership notices where
-required rather than fabricated attribution. Other rule findings must be fixed
-or receive a documented, narrowly scoped exception.
+The template also lists `D203` explicitly for formatter compatibility. It keeps
+`ISC001` enabled and leaves multiline implicit string concatenation allowed, so
+the conditional formatter conflict with `ISC002` does not apply. ALL also
+includes copyright-notice checks: use accurate ownership notices where required
+rather than fabricated attribution. Other rule findings must be fixed or receive
+a documented, narrowly scoped exception.
 
 Relevant references:
 [Ruff formatter compatibility](https://docs.astral.sh/ruff/formatter/#conflicting-lint-rules),
