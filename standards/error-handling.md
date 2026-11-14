@@ -7,7 +7,9 @@ Scope: Python applications and reusable packages.
 - Expose documented exception types from reusable packages. Give project-specific exceptions a common base class so callers can catch them consistently.
 - Use appropriate built-in exceptions, such as `ValueError` for an invalid value, when they describe the failure clearly. A project-specific exception should add a useful distinction for callers.
 - Catch an exception only where the code can recover, explain the failure to its caller, or report it at the end of the operation. Otherwise, let it propagate.
-- Avoid bare `except` clauses and catching `BaseException`. Catching `Exception` is reserved for a final process handler that reports unexpected failures and exits unsuccessfully.
+- Catch the most specific exception types you can handle. Keep the `try` body limited to the operation that can raise them. Use an `else` clause when it keeps follow-up work outside the protected block.
+- Avoid bare `except` clauses and catches of `BaseException`. Catch `Exception` only at an execution boundary, such as a process entry point or a request or job handler, when you can report unexpected failures and ensure the operation is treated as failed. Let shutdown and cancellation signals propagate.
+- Keep exception handlers focused. Prefer context managers for resource cleanup and avoid nested `try` blocks when the operations can be handled independently.
 - Do not hide a failed operation behind an empty result or success response. Use an explicit return value for expected absence when absence is a normal outcome.
 
 ## Preserve the cause
