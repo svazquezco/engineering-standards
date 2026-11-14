@@ -2,8 +2,8 @@
 
 Scope: repositories, tooling, and data handling.
 
-- Never commit credentials, tokens, private keys, personal data, or unauthorized private
-  repository content.
+- Never commit credentials, tokens, private keys, personal data, or unauthorized
+  private repository content.
 - Obtain secrets through environment variables or an approved secret provider.
 - Sanitize command output, logs, fixtures, URLs, and error messages.
 - Validate untrusted paths and inputs before reads, writes, or shell execution.
