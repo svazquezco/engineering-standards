@@ -4,9 +4,17 @@ Scope: Git projects.
 
 - Start ordinary work from the repository's documented default branch, normally
   main.
-- Use a descriptive lower-case branch, such as `feat/add-export`,
-  `fix/token-refresh`, or `docs/setup`. An issue identifier is optional unless
-  local policy requires it.
+- Every new branch for a change must use `<type>/<slug>`. Choose the type
+  according to the primary purpose of the change. Allowed types are `feat`,
+  `fix`, `docs`, `refactor`, `perf`, `test`, `build`, `ci`, `chore`, and
+  `revert`. Use lowercase letters, digits, and hyphens in the descriptive slug.
+  Examples include `feat/add-export`, `fix/token-refresh`, and `docs/setup`. An
+  issue identifier is optional unless local policy requires it.
+- This naming rule applies to branches created by people and automation.
+  Automated tools must override their default prefix if it differs from the
+  required type. Prefixes based on tool names are prohibited.
+- Existing branches may keep their names. A project that needs a different
+  convention for a specific workflow must document that exception locally.
 - Keep changes focused and preserve other contributors' work.
 - Rebase your own work branch onto its base when updating it. Coordinate before
   rewriting a shared branch.

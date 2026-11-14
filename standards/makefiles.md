@@ -13,14 +13,17 @@ required for every repository.
   including small ones. Use `make/common.mk` for shared definitions,
   `make/external_tools.mk` for external tooling, and `make/repo.mk` for
   repository-specific workflows.
-- Keep the root `Makefile` to about 20 lines at most. Limit it to variable
-  definitions (including `.DEFAULT_GOAL := help`), includes, and the `help`
-  target with its `.PHONY` declaration.
+- The root `Makefile` must contain at most 20 physical lines, including comments
+  and blank lines. Limit it to variable definitions (including
+  `.DEFAULT_GOAL := help`), includes, and the `help` target with its `.PHONY`
+  declaration.
 - Reserve `make/local.mk` for personal overrides and commands. Add it to
   `.gitignore` and load it with `-include make/local.mk` so it can be absent.
-- Run code analysis and application commands in isolated Docker Compose
-  containers by default. Expose those commands through Make targets so
-  developers can use the project's toolchain without installing it on the host.
+- Make targets for code analysis and application execution must run those
+  commands in isolated Docker Compose containers. If a supported environment
+  cannot run Compose or a command must access a host-only resource, document the
+  affected targets, the reason, and the supported execution command in the
+  project's local documentation.
 - Keep commands reproducible in documented environments and propagate failures
   through Make.
 - Include only commands and tooling relevant to the project’s documented

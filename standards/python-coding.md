@@ -34,7 +34,13 @@ Scope: Python source code. Unit tests follow
   behavior.
 - Inject external clients at integration boundaries. Keep helpers on a class
   when they serve only that class; use module functions for shared behavior.
-- Prefer `pathlib`, UTF-8 text, and context managers for filesystem operations.
+- Use `pathlib.Path` for filesystem paths. Convert paths at API boundaries that
+  require a different representation.
+- Specify UTF-8 explicitly for text file reads and writes. If an external format
+  requires another encoding, use that encoding and document the format
+  requirement at the boundary.
+- Use context managers for filesystem resources that support them. Release
+  resources without context manager support in a `finally` block.
 - For applications and tools, put the production package directly in the
   repository root. Reusable libraries may place it under `src/` or use the flat
   layout. In both layouts, use the project name in snake_case (for example,
