@@ -63,7 +63,7 @@ snapshot:
 <!-- x-release-please-start-version -->
 
 ```text
-https://raw.githubusercontent.com/svazquezco/engineering-standards/v1.1.0/standards/python-coding.md
+https://raw.githubusercontent.com/svazquezco/engineering-standards/v2.0.0/standards/python-coding.md
 ```
 
 <!-- x-release-please-end -->

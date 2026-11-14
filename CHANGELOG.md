@@ -1,5 +1,26 @@
 # Changelog
 
+## [2.0.0](https://github.com/svazquezco/engineering-standards/compare/v1.1.0...v2.0.0) (2026-11-14)
+
+
+### ⚠ BREAKING CHANGES
+
+* Apply the mandatory branch, pull request, Makefile, CLI, and Python requirements to new work. Document workflow-specific exceptions where the standards permit them.
+
+### Features
+
+* **adoption:** add interactive standards setup ([9eedae4](https://github.com/svazquezco/engineering-standards/commit/9eedae4a75e69e3fe8b6c3562d7cc1e19c20f779))
+* **adoption:** add interactive standards setup ([9bb5823](https://github.com/svazquezco/engineering-standards/commit/9bb5823a7cd54d39bbbf17b7172aa4f9fcbcecf0))
+* **python:** add framework scaffolding profiles ([f006761](https://github.com/svazquezco/engineering-standards/commit/f00676168cbff0bbb57667d9279139b172a971a3))
+* **python:** resolve latest stable scaffold dependencies ([2ebcf03](https://github.com/svazquezco/engineering-standards/commit/2ebcf03b471f4f5abf2ceafeb87eb49a0004bcf6))
+* **python:** resolve latest stable scaffold dependencies ([dc1aeab](https://github.com/svazquezco/engineering-standards/commit/dc1aeab793702dc8fc32627326f3c008e83aafc0))
+
+
+### Documentation
+
+* require explicit engineering policies ([c6b9959](https://github.com/svazquezco/engineering-standards/commit/c6b99597b7700b4c1def7f069e0c64418cc89815))
+* wrap Markdown prose for readability ([276aff5](https://github.com/svazquezco/engineering-standards/commit/276aff58e3ac7eb95904c859814ef178b3301851))
+
 ## [1.1.0](https://github.com/svazquezco/engineering-standards/compare/v1.0.1...v1.1.0) (2026-11-14)
 
 
