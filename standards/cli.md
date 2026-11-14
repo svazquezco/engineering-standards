@@ -13,10 +13,12 @@ Scope: projects exposing command-line interfaces.
 - Use the established CLI framework. Small standalone tools may use the language
   standard library; avoid adding a second parser or framework without a clear
   interface requirement.
-- Expose packaged commands through the package's supported entry-point mechanism.
-  Document invocation by script path for deliberately standalone scripts.
+- Expose packaged commands through the package's supported entry-point
+  mechanism. Document invocation by script path for deliberately standalone
+  scripts.
 - Obtain configuration through documented arguments, environment variables, or
-  configuration files. Never rely on a developer's personal paths or credentials.
+  configuration files. Never rely on a developer's personal paths or
+  credentials.
 
 ## Execution environments
 
@@ -28,6 +30,7 @@ Scope: projects exposing command-line interfaces.
 - Test argument validation, help, successful output, and failure exit statuses.
   Keep outbound operations isolated from tests.
 
-For Python packages, declare named console entry points under `[project.scripts]`
-in `pyproject.toml` when distributing a command. Follow the repository's runtime
-and dependency policy rather than mandating a framework for every script.
+For Python packages, declare named console entry points under
+`[project.scripts]` in `pyproject.toml` when distributing a command. Follow the
+repository's runtime and dependency policy rather than mandating a framework for
+every script.
