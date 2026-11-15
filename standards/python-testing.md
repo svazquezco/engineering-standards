@@ -15,12 +15,18 @@ strategy.
 - Use parametrization for variations of the same behavior. Avoid conditional
   assertion logic and private helper functions in test modules; use fixtures and
   factories.
-- Mirror the source package structure. Put shared fixtures in the narrowest
-  appropriate conftest.py; split unrelated fixture groups as needed.
+- Mirror the source package structure. Define a fixture in its test module if
+  only that module uses it. Share fixtures through the closest common
+  `conftest.py` of the tests that use them. For example, put fixtures shared by
+  billing tests in `tests/billing/conftest.py`. Use the suite's top-level
+  `conftest.py` for fixtures shared across the suite.
 - Use factory fixtures for repeated object construction and keep fixture
-  dependency chains to at most three levels. Split large fixture collections
-  into focused modules loaded through `pytest_plugins` in the root conftest.py;
-  do not declare it in nested conftest.py files.
+  dependency chains to at most three levels.
+- Use `pytest_plugins` only when you need to load a fixture module as a plugin
+  for the entire suite. Examples include a reusable fixture library that needs
+  explicit registration or a complex test suite with shared fixture modules
+  that need separate registration. Declare `pytest_plugins` only in the
+  suite's top-level `conftest.py`.
 - Do not use `SimpleNamespace`, empty stub classes, or loose attribute
   containers in place of typed domain values. Use real values or meaningful test
   doubles.
