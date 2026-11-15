@@ -111,12 +111,48 @@ uv run fastmcp run example_app/server.py:mcp
 ```
 
 The template creates `example_app/server.py` with a FastMCP instance for
-registering tools, resources, and prompts. The command serves MCP over stdio.
-See the [FastMCP quickstart][fastmcp-layout].
+registering tools, resources, and prompts. The `run` command serves MCP over
+stdio by default. For a stdio connection, the MCP client launches the command
+and manages the server process.
+
+To serve the same instance over Streamable HTTP, run this from the project root.
+
+```sh
+uv run fastmcp run example_app/server.py:mcp \
+  --transport http --host 127.0.0.1 --port 8765 --path /mcp
+```
+
+Enter `http://127.0.0.1:8765/mcp` as the MCP server URL. The server listens only
+on loopback. Keep the process running in its terminal while the client uses it.
+
+In another terminal, register the HTTP server with [Codex][codex-mcp] and
+confirm that it appears in the list.
+
+```sh
+codex mcp add example-app --url http://127.0.0.1:8765/mcp
+codex mcp list
+```
+
+For [Claude Code][claude-mcp], register the server at user scope to make it
+available across your projects, then check its entry and connection status.
+
+```sh
+claude mcp add --transport http example-app --scope user http://127.0.0.1:8765/mcp
+claude mcp list
+```
+
+Use `--scope local` from the project where you want the server if the
+registration should be private to you and limited to that project.
+
+See the [FastMCP server guide][fastmcp-layout] for transport details. The
+[Compose example](#run-with-compose) binds to `0.0.0.0` inside the container.
+Configure port publication separately in Compose to reach it from the host.
 
 [fastapi-layout]: https://fastapi.tiangolo.com/tutorial/bigger-applications/
 [django-layout]: https://docs.djangoproject.com/en/stable/intro/tutorial01/
-[fastmcp-layout]: https://gofastmcp.com/
+[fastmcp-layout]: https://gofastmcp.com/docs/deployment/running-server
+[codex-mcp]: https://developers.openai.com/learn/docs-mcp
+[claude-mcp]: https://code.claude.com/docs/en/mcp
 
 ## Install and validate
 
