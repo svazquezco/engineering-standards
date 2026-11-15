@@ -2,6 +2,11 @@
 
 Scope: all repositories.
 
+- All repository content must be written in English. This includes
+  documentation, code identifiers, comments, docstrings, tests, examples, logs,
+  error messages, commit messages, and pull request titles and descriptions.
+  Preserve the original wording of required license notices and quoted source
+  material.
 - Keep README.md as the human entry point: purpose, quick start, and links to
   detailed docs.
 - Keep AGENTS.md as the agent entry point: reading order, relevant policy
