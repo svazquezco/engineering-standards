@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.0.1](https://github.com/svazquezco/engineering-standards/compare/v3.0.0...v3.0.1) (2026-11-15)
+
+
+### Documentation
+
+* **python:** document FastMCP HTTP quickstart ([54476fb](https://github.com/svazquezco/engineering-standards/commit/54476fba98db702f09bbb353f390332c7c2c626f))
+
 ## [3.0.0](https://github.com/svazquezco/engineering-standards/compare/v2.0.0...v3.0.0) (2026-11-15)
 
 
