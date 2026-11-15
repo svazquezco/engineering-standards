@@ -1,5 +1,18 @@
 # Changelog
 
+## [3.0.0](https://github.com/svazquezco/engineering-standards/compare/v2.0.0...v3.0.0) (2026-11-15)
+
+
+### ⚠ BREAKING CHANGES
+
+* Write new repository content and pull request text in English. Preserve the wording of required license notices and quoted sources.
+* Move fixtures limited to a module or package into that module or the closest shared conftest.py. Reserve pytest_plugins for modules that need suite-wide registration.
+
+### Documentation
+
+* prioritize local pytest fixtures ([f599622](https://github.com/svazquezco/engineering-standards/commit/f599622776d7dff68bc6489ed8ea803f2b964691))
+* require English for repository content ([1ed06cb](https://github.com/svazquezco/engineering-standards/commit/1ed06cb1f09ecf4703030db694e9c81be312c563))
+
 ## [2.0.0](https://github.com/svazquezco/engineering-standards/compare/v1.1.0...v2.0.0) (2026-11-14)
 
 

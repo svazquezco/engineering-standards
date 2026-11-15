@@ -52,10 +52,10 @@ For example:
 
 Read the relevant linked standards before working on a task:
 
-- [Documentation](https://raw.githubusercontent.com/svazquezco/engineering-standards/v2.0.0/standards/documentation.md)
-- [Python coding](https://raw.githubusercontent.com/svazquezco/engineering-standards/v2.0.0/standards/python-coding.md)
-- [Python unit tests](https://raw.githubusercontent.com/svazquezco/engineering-standards/v2.0.0/standards/python-testing.md)
-- [Dependencies](https://raw.githubusercontent.com/svazquezco/engineering-standards/v2.0.0/standards/dependencies.md)
+- [Documentation](https://raw.githubusercontent.com/svazquezco/engineering-standards/v3.0.0/standards/documentation.md)
+- [Python coding](https://raw.githubusercontent.com/svazquezco/engineering-standards/v3.0.0/standards/python-coding.md)
+- [Python unit tests](https://raw.githubusercontent.com/svazquezco/engineering-standards/v3.0.0/standards/python-testing.md)
+- [Dependencies](https://raw.githubusercontent.com/svazquezco/engineering-standards/v3.0.0/standards/dependencies.md)
 ```
 
 <!-- x-release-please-end -->
@@ -76,10 +76,10 @@ workflow. The template includes pytest, Ruff ALL with documented exceptions and
 
 <!-- x-release-please-start-version -->
 
-Templates pin every link to the same published tag, such as `v2.0.0`:
+Templates pin every link to the same published tag, such as `v3.0.0`:
 
 ```text
-https://raw.githubusercontent.com/svazquezco/engineering-standards/v2.0.0/standards/documentation.md
+https://raw.githubusercontent.com/svazquezco/engineering-standards/v3.0.0/standards/documentation.md
 ```
 
 <!-- x-release-please-end -->
