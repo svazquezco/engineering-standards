@@ -9,6 +9,8 @@ This repository contains personal engineering policy, not an application.
 5. Before publishing or updating a PR, run pre-commit against all files using
    the command in docs/testing.md, fix failures, and report the result.
 
+Always follow the language rule in the [documentation standard](standards/documentation.md).
+
 Keep organization-specific workflows, issue trackers, runtime assumptions, and
 product names out of shared policy. Put adoption instructions in docs/ and
 copyable consumer guidance in templates/. Do not duplicate shared policy in
