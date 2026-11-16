@@ -66,6 +66,10 @@
         },
         {
           "type": "generic",
+          "path": "templates/README.md"
+        },
+        {
+          "type": "generic",
           "path": "docs/adoption.md"
         },
         {
