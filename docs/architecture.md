@@ -8,6 +8,8 @@ other projects.
   selection, Make and Compose entry points, and a consumer CI example.
 - `templates/AGENTS.md` provides ready-to-copy pinned links for a consuming
   project’s agent instructions.
+- `templates/README.md` shows how a consuming project links to its own
+  documentation and the pinned standards.
 - `templates/CLAUDE.md` imports AGENTS.md so Claude Code reads the same
   instructions.
 - `standards/index.json` is the machine-readable list of standards for skills

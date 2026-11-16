@@ -40,6 +40,17 @@ during setup. Review and commit the generated project files.
 If `AGENTS.md` already exists, add the relevant template references manually
 to preserve the project's instructions.
 
+## Project documentation
+
+Use [the README template](../templates/README.md) for the project title,
+purpose, and documentation links. Keep the same standards revision in README.md
+and AGENTS.md. If you selected a vendored copy, use relative links to it.
+
+Create architecture, contributing, and testing guides under `docs/`. Add
+`docs/local-development.md` if the project has a local development environment
+and `docs/usage.md` if it provides an application, CLI, API, or library. Link
+each applicable guide from README.md.
+
 Skills and tools can discover the standards and their scopes from
 [standards/index.json](../standards/index.json).
 

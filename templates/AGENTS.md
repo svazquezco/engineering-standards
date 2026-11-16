@@ -8,6 +8,7 @@ Keep the project’s purpose and main components in its existing documentation.
 2. docs/architecture.md
 3. docs/contributing.md
 4. docs/testing.md
+5. docs/local-development.md and docs/usage.md when relevant to the task.
 
 ## Shared standards
 
