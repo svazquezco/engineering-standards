@@ -1,5 +1,16 @@
 # Changelog
 
+## [4.0.0](https://github.com/svazquezco/engineering-standards/compare/v3.0.1...v4.0.0) (2026-11-16)
+
+
+### ⚠ BREAKING CHANGES
+
+* Move quick starts and commands from README.md into docs/local-development.md and docs/usage.md as applicable, and link the adopted standards revision from README.md.
+
+### Documentation
+
+* require focused READMEs and project guides ([47b8e47](https://github.com/svazquezco/engineering-standards/commit/47b8e473050f0d1078923ade54a93c6a0e3d0142))
+
 ## [3.0.1](https://github.com/svazquezco/engineering-standards/compare/v3.0.0...v3.0.1) (2026-11-15)
 
 
