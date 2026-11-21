@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.0.1](https://github.com/svazquezco/engineering-standards/compare/v4.0.0...v4.0.1) (2026-11-21)
+
+
+### Build
+
+* **deps:** bump python in /templates/python ([20e506f](https://github.com/svazquezco/engineering-standards/commit/20e506f22170c05666381defa6e9e9587faedb79))
+
 ## [4.0.0](https://github.com/svazquezco/engineering-standards/compare/v3.0.1...v4.0.0) (2026-11-16)
 
 
