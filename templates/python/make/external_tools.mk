@@ -9,8 +9,9 @@ format-check: ## Check Python formatting
 hooks-install: ## Install repository Git hooks
 	$(UV_RUN) pre-commit install
 
-lint: ## Check Python lint rules
+lint: ## Check Python lint rules with Ruff and Flake8
 	$(COMPOSE_RUN) ruff check .
+	$(COMPOSE_RUN) flake8 .
 
 lock: ## Generate or update uv.lock
 	$(UV) lock

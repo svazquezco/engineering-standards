@@ -78,10 +78,8 @@ read the relevant links; if access fails, they must report it.
 
 ## Initial Python configuration
 
-Follow [Start a Python project](python-projects.md) to initialize metadata with
-uv, merge the Python configuration, generate a lockfile, and add the initial CI
-workflow. The template includes pytest, Ruff ALL with documented exceptions and
-120-character lines, strict Pyright for production code, and pre-commit hooks.
+Follow [Start a Python project](python-projects.md) to set up uv, Ruff,
+wemake, Pyright, pytest, pre-commit, and CI.
 
 ## Reference a fixed version
 

@@ -12,7 +12,7 @@ repos:
   - repo: local
     hooks:
       - id: ruff-check
-        name: Ruff lint
+        name: Ruff and Flake8 lint
         entry: make lint
         language: system
         types_or: [python, pyi]
