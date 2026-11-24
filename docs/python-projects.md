@@ -93,11 +93,9 @@ uv run django-admin startproject example_app .
 uv run python manage.py check
 ```
 
-Django creates `manage.py` at the root and the settings, URL configuration,
-ASGI, and WSGI modules in `example_app/`. Create feature apps with
-`uv run python manage.py startapp feature_name` when needed. Include `manage.py`
-and the feature packages in Pyright's production scope. See [Django's project
-and app tutorial][django-layout].
+Add `manage.py` and any new Django apps to Pyright's production scope. Review
+`WPS407` for mutable constants in the generated `example_app/settings.py` before
+running `make check`. See [Django's project and app tutorial][django-layout].
 
 ### FastMCP
 
@@ -174,12 +172,10 @@ updates the lockfile, and `make format` formats code. `make check` runs all
 pre-commit hooks and the tests; CI calls the same target.
 
 Copy [.pre-commit-config.yaml](../templates/python/.pre-commit-config.yaml) to
-the project root. Ruff and Pyright run as local hooks through the Make targets,
-which run the tools in Compose using versions from uv.lock. The pre-commit
-runner and general file checks run on the host. Make exports `UV` and
-`UV_GROUPS` to hook subprocesses. For hooks invoked directly by Git, export any
-project-specific overrides in the shell as well. Install the Git hooks once
-after cloning:
+the project root. Pre-commit runs file checks on the host and calls Make targets
+for Ruff, Flake8, and Pyright in Compose. Those targets use versions from
+`uv.lock`. Export any project-specific `UV` or `UV_GROUPS` overrides for Git hooks.
+Install the hooks after cloning.
 
 ```sh
 make hooks-install
@@ -256,32 +252,29 @@ when the project needs them. Use the same group selection for synchronization
 and command execution, including the Compose command, so uv does not remove
 required groups between commands.
 
-## Configuration boundaries
+## Tool settings
 
-Pyright checks the configured production package in strict mode. Tests,
-fixtures, and fixture factories do not require annotations. Production modules
-must not import from tests, which would pull test code into production type
-analysis. Projects with other production paths must add them to Pyright’s
-include list.
+Keep project settings in [pyproject.toml](../templates/python/pyproject.toml).
 
-Ruff selects ALL, uses Google-style docstrings, and delegates formatting choices
-to its formatter. The template excludes module/package docstring requirements,
-annotation and function-docstring requirements in tests/fixtures, and the
-assertion, unused-fixture-argument, magic-value, and implicit-namespace-package
-warnings in tests. Formatter-conflicting indentation, quote, and comma checks
-are also excluded. The Google convention excludes incompatible docstring styles.
-The template also lists `D203` explicitly for formatter compatibility. It keeps
-`ISC001` enabled and leaves multiline implicit string concatenation allowed, so
-the conditional formatter conflict with `ISC002` does not apply. ALL also
-includes copyright-notice checks: use accurate ownership notices where required
-rather than fabricated attribution. Other rule findings must be fixed or receive
-a documented, narrowly scoped exception.
-
-Relevant references:
-[Ruff formatter compatibility](https://docs.astral.sh/ruff/formatter/#conflicting-lint-rules),
-[Ruff Google convention](https://docs.astral.sh/ruff/settings/#lint_pydocstyle_convention),
-[Pyright configuration](https://github.com/microsoft/pyright/blob/main/docs/configuration.md),
-and [uv CI](https://docs.astral.sh/uv/guides/integration/github/).
+- **Pyright** checks production code in strict mode. Add production paths to
+  `include` and keep test imports out of production modules.
+- **Ruff** selects `ALL` plus `pytest-fixture-autouse`. It limits McCabe
+  complexity to 6, requires `import datetime as dt`, and bans `from` imports
+  from `ast` and `datetime`. The formatter uses double quotes. Ruff checks
+  Google-style docstrings and skips modules, packages, and `@property` methods.
+  Add accurate copyright notices where required by `CPY001`.
+- **Ruff in tests** allows missing annotations and docstrings, assertions,
+  autouse fixtures, unused fixture arguments, literal expected values,
+  standalone test modules, placeholder credentials, and subprocess calls.
+- **wemake** uses default thresholds. `[tool.flake8]` allows repeated strings
+  (`WPS226`), code in package initializers (`WPS412`), and `__all__` metadata.
+  Only `tests/` can exceed the limits for module members (`WPS202`) and local
+  variables (`WPS210`).
+  [wemake configuration guide](https://wemake-python-styleguide.readthedocs.io/en/stable/pages/usage/configuration.html)
+- **flake8-aaa** checks Arrange, Act, Assert. The `large` style lets the Act
+  block include surrounding context managers. Use `# act` to mark the action
+  when assigning to a descriptive variable name.
+  [Flake8-AAA configuration guide](https://flake8-aaa.readthedocs.io/en/stable/options.html)
 
 Run the [standards adoption setup](adoption.md#set-up-a-new-project) to choose
 pinned links, a subtree, or a submodule for the new project. Keep the applicable

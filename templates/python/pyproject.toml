@@ -1,10 +1,13 @@
 [dependency-groups]
 dev = [
+    "flake8-aaa",
+    "flake8-pyproject",
     "pre-commit",
     "pyright",
     "pytest",
     "pytest-mock",
     "ruff",
+    "wemake-python-styleguide",
 ]
 
 [tool.uv]
@@ -28,7 +31,11 @@ line-length = 120
 src = ["."]
 
 [tool.ruff.lint]
+preview = true
+explicit-preview-rules = true
 select = ["ALL"]
+extend-select = ["pytest-fixture-autouse"]
+external = ["AAA", "WPS"]
 ignore = [
     "D100", # Do not require module docstrings.
     "D104", # Do not require package docstrings.
@@ -48,6 +55,16 @@ ignore = [
     "W191", # Let the formatter manage indentation.
 ]
 
+[tool.ruff.lint.flake8-import-conventions]
+banned-from = ["ast", "datetime"]
+aliases = { datetime = "dt" }
+
+[tool.ruff.lint.flake8-quotes]
+inline-quotes = "double"
+
+[tool.ruff.lint.mccabe]
+max-complexity = 6
+
 [tool.ruff.lint.per-file-ignores]
 "tests/**/*.py" = [
     "ANN001", # Test and fixture parameters remain unannotated.
@@ -56,15 +73,38 @@ ignore = [
     "ANN201", # Test and fixture return values remain unannotated.
     "ANN202", # Fixture factories remain unannotated.
     "ARG001", # Fixtures requested only for their side effects stay unused.
+    "D101",   # Test helper classes use descriptive names.
+    "D102",   # Test helper methods use descriptive names.
     "D103",   # Use descriptive test and fixture names instead of docstrings.
+    "pytest-fixture-autouse", # Allow autouse fixtures in tests.
     "INP001", # Tests are not a package; pytest uses --import-mode=importlib.
     "PLR2004", # Expected values in assertions are literal.
     "S101",   # Assertions are the pytest assertion mechanism.
+    "S105",   # Test data may contain hardcoded placeholder credentials.
+    "S106",   # Test calls may pass hardcoded placeholder credentials.
+    "S404",   # Tests may import subprocess to exercise command-line behavior.
+    "S603",   # Tests may launch subprocesses with controlled arguments.
+    "S607",   # Tests may invoke executables by name.
 ]
 "**/conftest.py" = ["ANN001", "ANN002", "ANN003", "ANN201", "ANN202", "D103", "INP001"]
 
 [tool.ruff.lint.pydocstyle]
 convention = "google"
+ignore-decorators = ["property"]
+
+[tool.flake8]
+select = ["AAA", "WPS"]
+allowed-module-metadata = ["__all__"]
+aaa_act_block_style = "large"
+extend-exclude = [".venv", "build", "dist"]
+extend-ignore = [
+    "WPS226", # Keep repeated keys and labels readable in context.
+    "WPS412", # Allow initialization code in package entry points.
+]
+per-file-ignores = [
+    # Group related scenarios and use named intermediate values in test setup.
+    "tests/*:WPS202,WPS210",
+]
 
 [tool.uv.build-backend]
 module-name = "example_app"
