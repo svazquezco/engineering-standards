@@ -7,10 +7,19 @@ _exclude:
   - "{% if framework != 'fastapi' %}**/main.py{% endif %}"
   - "{% if framework != 'fastapi' %}**/routers{% endif %}"
   - "{% if framework != 'fastmcp' %}**/server.py{% endif %}"
+  - "{% if framework != 'django' %}manage.py{% endif %}"
+  - "{% if framework != 'django' %}{{ package_name }}/users{% endif %}"
+  - "{% if framework != 'django' or not django_api %}**/api.py{% endif %}"
+_tasks:
+  - command: [uv, add, "psycopg[binary]"]
+    when: "{{ framework == 'django' }}"
+  - command: [uv, add, django-ninja]
+    when: "{{ framework == 'django' and django_api }}"
 
 framework:
   type: str
   choices:
+    Django: django
     FastAPI: fastapi
     FastMCP: fastmcp
   default: fastapi
@@ -25,4 +34,12 @@ package_name:
       'global', 'if', 'import', 'in', 'is', 'lambda', 'nonlocal', 'not', 'or',
       'pass', 'raise', 'return', 'try', 'while', 'with', 'yield') %}
     Enter a package name that is not a Python keyword.
+    {% elif framework == 'django' and package_name in ('config', 'django', 'manage') %}
+    Choose a name other than config, django, or manage for the Django app package.
     {% endif %}
+
+django_api:
+  type: bool
+  when: "{{ framework == 'django' }}"
+  default: false
+  help: Enable an API with Django Ninja?

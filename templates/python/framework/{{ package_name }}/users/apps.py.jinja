@@ -1,0 +1,8 @@
+from django.apps import AppConfig
+
+
+class UsersConfig(AppConfig):
+    """Register the project's user app."""
+
+    default_auto_field = "django.db.models.BigAutoField"
+    name = "{{ package_name }}.users"

@@ -104,6 +104,8 @@ extend-ignore = [
 per-file-ignores = [
     # Group related scenarios and use named intermediate values in test setup.
     "tests/*:WPS202,WPS210",
+    # Django generates migration modules with numeric prefixes.
+    "**/migrations/[0-9]*.py:WPS102",
 ]
 
 [tool.uv.build-backend]
