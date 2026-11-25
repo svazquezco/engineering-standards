@@ -1,5 +1,18 @@
 # Changelog
 
+## [4.1.0](https://github.com/svazquezco/engineering-standards/compare/v4.0.0...v4.1.0) (2026-11-25)
+
+
+### Features
+
+* **templates:** enable strict wemake linting ([91fca83](https://github.com/svazquezco/engineering-standards/commit/91fca83ffbdc3d4aeb8f1f96b6175f80d2f4e9b9))
+
+
+### Build
+
+* **deps:** bump astral-sh/setup-uv from 10.3.3 to 10.4.0 ([7d2df87](https://github.com/svazquezco/engineering-standards/commit/7d2df871a5568c8e217cf80d02060cab6ad97e2e))
+* **deps:** bump python in /templates/python ([20e506f](https://github.com/svazquezco/engineering-standards/commit/20e506f22170c05666381defa6e9e9587faedb79))
+
 ## [4.0.0](https://github.com/svazquezco/engineering-standards/compare/v3.0.1...v4.0.0) (2026-11-16)
 
 
