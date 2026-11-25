@@ -5,6 +5,7 @@
 
 ### Features
 
+* **templates:** add a Django project scaffold ([2d321e2](https://github.com/svazquezco/engineering-standards/commit/2d321e2e354312a35ec29b5f73f70fc84275c2fd))
 * **templates:** enable strict wemake linting ([91fca83](https://github.com/svazquezco/engineering-standards/commit/91fca83ffbdc3d4aeb8f1f96b6175f80d2f4e9b9))
 
 
