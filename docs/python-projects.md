@@ -67,16 +67,16 @@ before creating its production package. Replace `example_app` with the project's
 Python package name. The framework commands resolve the latest compatible stable
 versions using the merged template settings.
 
-### FastAPI
-
 Use Copier 9.17 or later in the 9.x series. Replace
 `/path/to/engineering-standards` with the checkout containing the template. Omit
 `--defaults` and the `--data` options to select the Copier profile and enter the
 package name interactively.
 
+### FastAPI
+
 ```sh
 uv add 'fastapi[standard]'
-copier copy --defaults --data framework=fastapi --data package_name=example_app \
+copier copy --skip-tasks --defaults --data framework=fastapi --data package_name=example_app \
   /path/to/engineering-standards/templates/python/framework .
 uv run fastapi dev example_app/main.py
 ```
@@ -89,21 +89,69 @@ the API grows. See [FastAPI's multi-file layout][fastapi-layout].
 
 ```sh
 uv add django
-uv run django-admin startproject example_app .
-uv run python manage.py check
+uv add --dev django-stubs
+copier copy --trust --data framework=django --data package_name=example_app \
+  /path/to/engineering-standards/templates/python/framework .
 ```
 
-Add `manage.py` and any new Django apps to Pyright's production scope. Review
-`WPS407` for mutable constants in the generated `example_app/settings.py` before
-running `make check`. See [Django's project and app tutorial][django-layout].
+Copier installs `psycopg[binary]` and asks whether to enable an API. If enabled,
+it installs Django Ninja and mounts the API at `/api/`. Open `/api/docs` to inspect
+the schema. For automated setup, pass `--defaults --data django_api=true` or
+`false`. `--trust` allows Copier to run the installation tasks.
+[Django Ninja tutorial][django-ninja]
+
+The root `manage.py` runs project commands. The `config/` package holds
+settings, URL routing, ASGI, WSGI, and the optional Django Ninja entry point.
+The `example_app/` package contains the `users` app, which provides
+`AUTH_USER_MODEL = "users.User"`, its initial migration, and admin registration.
+Apply this scaffold before running the first migration.
+[Django custom user models][django-auth]
+
+Set `POSTGRES_DB`, `POSTGRES_USER`, and `POSTGRES_PASSWORD` for your PostgreSQL
+database. `POSTGRES_HOST` defaults to `127.0.0.1` and `POSTGRES_PORT` to `5432`.
+To create a local database with Docker, run this once and retain the password
+for subsequent sessions. [PostgreSQL Docker image][postgres-image]
+
+```sh
+export POSTGRES_DB=example_app POSTGRES_USER=example_app
+export POSTGRES_PASSWORD="$(uv run python -c 'from secrets import token_urlsafe; print(token_urlsafe(24))')"
+docker run --detach --name example-app-postgres \
+  --publish 127.0.0.1:5432:5432 \
+  --env POSTGRES_DB --env POSTGRES_USER --env POSTGRES_PASSWORD \
+  --volume example-app-postgres:/var/lib/postgresql postgres:18
+```
+
+Once PostgreSQL is ready, migrate and run Django.
+
+```sh
+export DJANGO_SECRET_KEY="$(uv run python -c 'from django.core.management.utils import get_random_secret_key; print(get_random_secret_key())')"
+export DJANGO_DEBUG=1
+uv run python manage.py migrate
+uv run python manage.py check
+uv run python manage.py runserver
+```
+
+Create an admin account with `uv run python manage.py createsuperuser` and open
+`http://127.0.0.1:8000/admin/`.
+Add `config` and `manage.py` to Pyright's `include`. Create feature apps with
+`uv run python manage.py startapp catalog`. Register them in `LOCAL_APPS` and
+add their paths to Pyright. Keep models, views, URLs, and migrations in their
+app. [Django project and app tutorial][django-layout]
+
+Register external apps in `THIRD_PARTY_APPS`. The scaffold combines
+`DJANGO_APPS`, `THIRD_PARTY_APPS`, and `LOCAL_APPS` in that order.
+
+For deployment, supply a persistent secret through `DJANGO_SECRET_KEY` and set
+`DJANGO_ALLOWED_HOSTS` to a space-separated list of hostnames. Leave
+`DJANGO_DEBUG` unset. Configure the database, static files, and HTTPS for the
+deployment and run `uv run python manage.py check --deploy`.
+[Django deployment checklist][django-deployment]
 
 ### FastMCP
 
-Use the same Copier installation and template path as for FastAPI.
-
 ```sh
 uv add fastmcp
-copier copy --defaults --data framework=fastmcp --data package_name=example_app \
+copier copy --skip-tasks --defaults --data framework=fastmcp --data package_name=example_app \
   /path/to/engineering-standards/templates/python/framework .
 uv run fastmcp run example_app/server.py:mcp
 ```
@@ -147,7 +195,11 @@ See the [FastMCP server guide][fastmcp-layout] for transport details. The
 Configure port publication separately in Compose to reach it from the host.
 
 [fastapi-layout]: https://fastapi.tiangolo.com/tutorial/bigger-applications/
+[django-ninja]: https://django-ninja.dev/tutorial/
 [django-layout]: https://docs.djangoproject.com/en/stable/intro/tutorial01/
+[django-auth]: https://docs.djangoproject.com/en/stable/topics/auth/customizing/#using-a-custom-user-model-when-starting-a-project
+[django-deployment]: https://docs.djangoproject.com/en/stable/howto/deployment/checklist/
+[postgres-image]: https://hub.docker.com/_/postgres
 [fastmcp-layout]: https://gofastmcp.com/docs/deployment/running-server
 [codex-mcp]: https://developers.openai.com/learn/docs-mcp
 [claude-mcp]: https://code.claude.com/docs/en/mcp
@@ -226,7 +278,10 @@ runs `python -m example_app`. For a framework application, keep the
 command with the matching entry point:
 
 - FastAPI uses `fastapi run example_app/main.py --host 0.0.0.0`.
-- Django uses `python manage.py runserver 0.0.0.0:8000` for development.
+- Django uses `python manage.py runserver 0.0.0.0:8000` for development. Pass
+  the Django and PostgreSQL variables through the service environment. Set
+  `POSTGRES_HOST` to a host reachable from the container, such as the database
+  service name when PostgreSQL runs on the same Compose network.
 - FastMCP can use HTTP with
   `fastmcp run example_app/server.py:mcp --transport http --host 0.0.0.0`.
 
